@@ -1475,7 +1475,7 @@ MonoBehaviour:
     overrideState: 1
     value: 2
   aperture:
-    overrideState: 0
+    overrideState: 1
     value: 5.6
   focalLength:
     overrideState: 1
@@ -1523,6 +1523,9 @@ MonoBehaviour:
   thicknessModifier:
     overrideState: 1
     value: 10
+  zBias:
+    overrideState: 0
+    value: 0.0001
   directLightingStrength:
     overrideState: 1
     value: 0.783
