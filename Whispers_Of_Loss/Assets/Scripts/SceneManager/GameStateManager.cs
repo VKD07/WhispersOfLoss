@@ -10,7 +10,6 @@ public class GameStateManager : MonoBehaviour
     [Header("=== PLAYER WAKES UP ===")]
     public VideoPlayer videoPlayer;
     public GameObject VideoTexture;
-    bool videoHasEnded;
 
     public GameObject player;
     public GameObject cameraHolder;
@@ -21,12 +20,7 @@ public class GameStateManager : MonoBehaviour
     public GameObject[] gameCameras;
     public float introVideoTime = 24f;
     public float timeDelayToActivatePlayer = 10f;
-    public float timeDelayToFaceRight;
-    public float timeDelayToStandUp;
-   
-    public float wakeUpCameraSpeed = .2f;
-    public float faceRightCameraSpeed = 1f;
-    public float standUpCameraSpeed;
+    public float faceRightCameraSpeed = 3f;
 
     PlayerWakesUpState playerWakesUpState = new PlayerWakesUpState();
     SceneState currentState;

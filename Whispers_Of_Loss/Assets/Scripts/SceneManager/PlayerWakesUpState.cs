@@ -15,7 +15,6 @@ public class PlayerWakesUpState : SceneState
     {
         gameStateManager = state;
         gameStateManager.psController.SetVigannete(1f);
-        state.cinemachineBrain.m_DefaultBlend.m_Time = state.wakeUpCameraSpeed;
         state.gameCameras[0].SetActive(false);
         state.StartCoroutine(ActivatePlayer(state, state.timeDelayToActivatePlayer));
         state.StartCoroutine(DisableBlink());
@@ -38,6 +37,7 @@ public class PlayerWakesUpState : SceneState
     IEnumerator DisableBlink()
     {
         yield return new WaitForSeconds(15);
+        gameStateManager.cinemachineBrain.m_DefaultBlend.m_Time = gameStateManager.faceRightCameraSpeed;
         disableBlink = true;
         gameStateManager.psController.SetVigannete(.1f);
     }

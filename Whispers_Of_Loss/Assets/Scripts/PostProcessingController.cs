@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
@@ -57,7 +58,7 @@ public class PostProcessingController : MonoBehaviour
             m_ColorAdjustments = adj;
         }
         satIntensity = m_ColorAdjustments.saturation;
-        satIntensity.value = 0;
+        satIntensity.value = -25;
     }
 
     public void ViganetteBlink()
@@ -93,12 +94,12 @@ public class PostProcessingController : MonoBehaviour
 
     IEnumerator SaturationEffect(bool val)
     {
-        float targetIntensity = val ? -100f : 0f; // Target intensity based on the boolean value
-
-        while (Mathf.Abs(satIntensity.value - targetIntensity) > 0.01f)
+        float targetIntensity = val ? -100f : -25f; // Target intensity based on the boolean value
+        ClampedFloatParameter intensity = m_ColorAdjustments.saturation;
+        while (Mathf.Abs(intensity.value - targetIntensity) > 0.01f)
         {
             // Gradually move towards the target intensity
-            satIntensity.value = Mathf.MoveTowards(satIntensity.value, targetIntensity, Time.deltaTime * satSpeed);
+            m_ColorAdjustments.saturation.value = Mathf.MoveTowards(intensity.value, targetIntensity, Time.deltaTime * satSpeed);
             yield return null;
         }
     }
