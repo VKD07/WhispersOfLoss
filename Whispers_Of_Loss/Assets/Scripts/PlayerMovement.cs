@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
-
+                                                  
     private void HeadBob()
     {
         if (rb.velocity.magnitude <= 0) return;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -21,6 +22,8 @@ public class PostProcessingController : MonoBehaviour
     public float satSpeed = .3f;
     ColorAdjustments m_ColorAdjustments;
     ClampedFloatParameter satIntensity;
+    FloatParameter postExposureVal;
+    public float initPostExposure;
     private void Awake()
     {
         if (instance == null)
@@ -58,6 +61,9 @@ public class PostProcessingController : MonoBehaviour
             m_ColorAdjustments = adj;
         }
         satIntensity = m_ColorAdjustments.saturation;
+        postExposureVal = m_ColorAdjustments.postExposure;
+        postExposureVal.value = -0.12f;
+        initPostExposure = postExposureVal.value;
         satIntensity.value = -25;
     }
 
@@ -101,6 +107,17 @@ public class PostProcessingController : MonoBehaviour
             // Gradually move towards the target intensity
             m_ColorAdjustments.saturation.value = Mathf.MoveTowards(intensity.value, targetIntensity, Time.deltaTime * satSpeed);
             yield return null;
+        }
+    }
+
+    public void DarkenEnvironment(bool val)
+    {
+        if (val)
+        {
+            postExposureVal.value = -3f;
+        }else
+        {
+            postExposureVal.value = initPostExposure;
         }
     }
 }

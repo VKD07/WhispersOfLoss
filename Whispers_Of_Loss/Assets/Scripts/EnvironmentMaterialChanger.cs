@@ -27,22 +27,8 @@ public class EnvironmentMaterialChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ChangeMaterialsTexture(true);
-            for (int i = 0; i < fire.Length; i++)
-            {
-                fire[i].SetActive(true);
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.P))
-        {
-            ChangeMaterialsTexture(false);
-            for (int i = 0; i < fire.Length; i++)
-            {
-                fire[i].SetActive(false);
-            }
-        }
+      
+   
     }
 
     void SetInitTex()

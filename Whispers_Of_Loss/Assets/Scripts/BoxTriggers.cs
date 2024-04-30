@@ -23,6 +23,9 @@ public class BoxTriggers : MonoBehaviour
     public bool enableSaturation;
     public float saturationTime = 5f;
 
+    [Header("Environment Change")]
+    public bool enableEnvironmentChange;
+    public float timeToNormal = 2f;
     bool hasTriggered;
     private void OnTriggerEnter(Collider other)
     {
@@ -36,7 +39,12 @@ public class BoxTriggers : MonoBehaviour
 
     IEnumerator PlayWhispers()
     {
-        if(disablePlayerMovement)
+        if (enableEnvironmentChange)
+        {
+            EnvironmentMaterialChanger.instance?.ChangeMaterialsTexture(true);
+            StartCoroutine(ChangeMaterialToNormal());
+        }
+        if (disablePlayerMovement)
         {
             PlayerMovement.instance?.DisablePlayerMovement(true);
             StartCoroutine(EnablePlayerMovement());
@@ -80,5 +88,11 @@ public class BoxTriggers : MonoBehaviour
     {
         yield return new WaitForSeconds(saturationTime);
         PostProcessingController.instance?.SetSaturationEffect(false);
+    }
+
+    IEnumerator ChangeMaterialToNormal()
+    {
+        yield return new WaitForSeconds(timeToNormal);
+        EnvironmentMaterialChanger.instance?.ChangeMaterialsTexture(false);
     }
 }
