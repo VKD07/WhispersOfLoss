@@ -10,6 +10,7 @@ public class GuidingHopeScript : MonoBehaviour
     public AudioSource screamingSource;
     public AudioSource runSource;
     public GameObject pills;
+    public SubtitleManager subtitleManager;
 
     public float volumeChangeSpeed = .1f;
     public AudioSource [] fireSounds;
@@ -26,6 +27,7 @@ public class GuidingHopeScript : MonoBehaviour
         livingRoomBarrier.SetActive(false);
         blackImage.SetActive(true);
         AudioManager.instance.PlaySound("ItsOkay");
+        subtitleManager.EnableSubTitle();
         screamingSource.volume = 0.09f;
 
         yield return new WaitForSeconds(15f);
